@@ -24,14 +24,15 @@ jobs:
         node-version: 16
         cache: 'npm'
     - run: node index.js
-    
+
     - name: setup git config
       run: |
-        git config user.name "GitHub Actions Bot"
-        git config user.email "<>"
+        git config user.name "$GITHUB_ACTOR"
+        git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        git config pull.rebase false
 
     - name: commit
       run: |
         git add -A
         git commit -m "chore: automatic image update" || true
-        git push origin $GITHUB_REF
+        git push
