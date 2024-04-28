@@ -85,7 +85,7 @@ const skippedChainIds = ['localterra', 'neutron-1', 'pion-1'];
  * @return {string[]} lcds LCD endpoint values for chains on Station.
  */
 async function getLCDs() {
-  const chainResponse = await fetch('https://station-assets.hexxagon.io/chains.json');
+  const chainResponse = await fetch('https://chain-registry.hexxagon.io/chains.json');
   const chainData = await chainResponse.json();
 
   var lcds = new Array();
