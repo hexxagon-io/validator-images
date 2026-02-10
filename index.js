@@ -4,8 +4,7 @@ import axios from 'axios';
 import { promisify } from 'util';
 import fs from 'fs';
 import path from 'path';
-
-main().catch(console.error);
+import { pathToFileURL } from 'url';
 
 const USER_AGENT = 'validator-images/1.0';
 const HTTP_TIMEOUT_MS = 15_000;
@@ -303,4 +302,12 @@ export default class Semaphore {
         this.tryNext();
       });
   }
+}
+
+// Only run when invoked as a script (`node index.js`), not when imported.
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch(err => {
+    console.error(err);
+    process.exitCode = 1;
+  });
 }
